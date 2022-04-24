@@ -3,6 +3,7 @@ import 'package:meals_app/screens/categories_screen.dart';
 import 'package:meals_app/screens/meal_detail_screen.dart';
 //import 'package:meals_app/widgets/category_item.dart';
 import 'package:meals_app/screens/category_meals_screen.dart';
+import 'package:meals_app/screens/tabs_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold))),
       //home: CategoriesScreen(),
       routes: {
-        '/': (ctx) => CategoriesScreen(),
+        '/': (ctx) => TabsScreen(),
         CategoryMealScreen.routeName: (ctx) => CategoryMealScreen(),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen()
       },
