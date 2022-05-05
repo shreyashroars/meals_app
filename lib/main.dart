@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     'vegetarian': false
   };
   List<Meal> availableMeals = DUMMY_MEALS;
+  List<Meal> favouriteMeals = [];
   void setFilters(Map<String, bool> filterdata) {
     setState(() {
       filters = filterdata;
@@ -45,13 +46,29 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void toggleFavourites(String mealId) {
+    setState(() {
+      final existingIndex =
+          favouriteMeals.indexWhere((meal) => meal.id == mealId);
+      if (existingIndex >= 0) {
+        favouriteMeals.removeAt(existingIndex);
+      } else {
+        favouriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      }
+    });
+  }
+
+  bool isFavourite(String mealId) {
+    return favouriteMeals.any((meal) => meal.id == mealId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-              .copyWith(secondary: Color.fromARGB(255, 211, 22, 120)),
+              .copyWith(secondary: const Color.fromARGB(255, 232, 37, 137)),
           canvasColor: Colors.white,
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -63,10 +80,11 @@ class _MyAppState extends State<MyApp> {
                   fontWeight: FontWeight.bold))),
       //home: CategoriesScreen(),
       routes: {
-        '/': (ctx) => TabsScreen(),
+        '/': (ctx) => TabsScreen(favouriteMeals),
         CategoryMealScreen.routeName: (ctx) =>
             CategoryMealScreen(availableMeals),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        MealDetailScreen.routeName: (ctx) =>
+            MealDetailScreen(toggleFavourites, isFavourite),
         FilterScreen.routeName: (ctx) => FilterScreen(filters, setFilters)
       },
       onUnknownRoute: (settings) {
