@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/screens/FilterScreen.dart';
 import 'package:meals_app/screens/categories_screen.dart';
 import 'package:meals_app/screens/meal_detail_screen.dart';
 //import 'package:meals_app/widgets/category_item.dart';
@@ -14,12 +15,12 @@ class MyApp extends StatelessWidget {
       title: 'DeliMeals',
       theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-              .copyWith(secondary: Colors.lightBlue),
+              .copyWith(secondary: Color.fromARGB(255, 211, 22, 120)),
           canvasColor: Colors.white,
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: const TextStyle(color: Color.fromRGBO(200, 51, 51, 1)),
-              bodyText2: const TextStyle(color: Colors.white),
+              bodyText2: const TextStyle(color: Colors.black),
               headline6: const TextStyle(
                   fontSize: 24,
                   fontFamily: 'Raleway',
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (ctx) => TabsScreen(),
         CategoryMealScreen.routeName: (ctx) => CategoryMealScreen(),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen()
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        FilterScreen.routeName: (ctx) => FilterScreen()
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
