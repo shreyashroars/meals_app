@@ -23,32 +23,31 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Drawer(
+        child: Column(
       children: [
         Container(
           height: 120,
           width: double.infinity,
           padding: const EdgeInsets.all(20),
-          color: Theme.of(context).secondaryHeaderColor,
+          color: Colors.purple,
           alignment: Alignment.centerLeft,
-          child: Text(
+          child: const Text(
             'Cooking Up',
             style: TextStyle(
-                fontWeight: FontWeight.w900,
-                color: Theme.of(context).primaryColor,
-                fontSize: 30),
+                fontWeight: FontWeight.w900, color: Colors.white, fontSize: 30),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         buildListTile('Meals', Icons.restaurant, () {
-          Navigator.of(context).pushNamed('/');
+          Navigator.of(context).pushReplacementNamed('/');
         }),
         buildListTile('Filters', Icons.settings, () {
-          Navigator.of(context).pushNamed(FilterScreen.routeName);
+          Navigator.of(context).pushReplacementNamed(FilterScreen.routeName);
         })
       ],
-    );
+    ));
   }
 }
